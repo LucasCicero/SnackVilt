@@ -1,0 +1,87 @@
+<html>
+
+<html xmlns:th="http://thymeleaf.org"
+ 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">	
+
+<head>
+	<title>SnackApp</title>
+	 <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+</head>
+
+
+
+
+<body>
+		
+		<header>
+		<nav class="menu">
+		    <div class="nav-wrapper">
+		      <a href="#" class="brand-logo">Pessoa</a>
+		      <ul id="nav-mobile" class="right hide-on-med-and-down">
+		        <li><a href="/cadastrarPessoa" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>Cadastrar Pessoa</a></li>
+		      </ul>
+		    </div>
+		</nav>
+	</header>
+		
+		
+		
+		
+		<div th:each="pessoa : ${pessoa}" class="container detalhesPessoa">
+		<h5>Detalhes da Pessoa</h5>
+		<div class="row">
+			<p>Nome: <span th:text="${pessoa.pessoaNome}"></span></p>
+			
+			</div>		
+		</div>
+		
+		
+		
+		
+		<th:block th:include="mensagemValidacao"></th:block>
+		<div class="container formPessoa">
+		<h5>Incluir Nova Semana</h5>
+		<form method="post" th:object="${pessoa}">
+			<div class="row">
+				<div class="input-field col s6">
+				Nome: <input type="text" value="" name="nomeSemana" placeholder="Nome da Semana"/>
+			
+			
+			<button class="waves-effect waves-light btn" type="submit">Adicionar Semana</button>
+				</div>
+			</div>
+		</form>
+		</div>
+		
+		
+		<table class="container tabelaSemana">
+		<thead>
+			<tr>
+				<th>Semanas para trazer lanche:</th>
+				<th>Deletar</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="semana : ${semana}">
+				<td><span th:text="${semana.nomeSemana}"></span></td>			
+				<td><a class="waves-effect waves-light btn-small" th:href="${(#mvc.url('SC#deletarSemana').arg(0, semana.nomeSemana)).build()}"><i class="material-icons left">delete</i></a></td>
+				
+			</tr>
+		</tbody>
+	</table>
+				
+		      <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+		
+		
+		
+</body>
+	
+
+</html>
